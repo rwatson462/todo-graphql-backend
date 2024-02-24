@@ -1,0 +1,24 @@
+
+type User {
+    id: ID!
+    name: String!
+    email: String!
+}
+
+type LoginResponse {
+    user: User!
+    token: String!
+}
+
+
+extend type Query {
+    me: User @auth(with: "sanctum")
+    users(
+        name: String @like(template: "%{}%")
+    ): [User]! @paginate @guard
+}
+
+extend type Mutation {
+    login(email: String!, password: String!): LoginResponse @field(resolver: "Login")
+    register(email: String!, name: String!, password: String!): User @field(resolver: "Register")
+}
