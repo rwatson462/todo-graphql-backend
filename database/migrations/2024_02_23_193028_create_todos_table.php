@@ -10,7 +10,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('todos', function (Blueprint $table) {
-            $table->ulid('id')->primary();
+            $table->uuid('id')->primary();
             $table->foreignIdFor(User::class)->index();
 
             $table->string('title');
