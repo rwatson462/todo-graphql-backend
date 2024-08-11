@@ -14,13 +14,13 @@ class Todo extends Model
 
     protected $guarded = ['id'];
 
+    protected $attributes = [
+        'status' => TodoStatus::New->value,
+    ];
+
     protected $fillable = [
         'title',
         'status',
-    ];
-
-    protected $casts = [
-        'status' => TodoStatus::class,
     ];
 
     /**

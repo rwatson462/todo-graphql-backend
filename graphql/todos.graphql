@@ -1,0 +1,16 @@
+
+type Todo {
+    id: ID!
+    title: String!
+    status: String!
+}
+
+extend type Query {
+    todos(
+        title: String @like(template: "%{}%")
+    ): [Todo]! @paginate @guard
+}
+
+extend type Mutation {
+    createTodo(title: String!): Todo @field(resolver: "CreateTodo") @guard
+}
